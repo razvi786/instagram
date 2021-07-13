@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\ProfilesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+Route::get('/posts/{post}', [PostsController::class, 'show'])->name('posts.show');
+
+Route::get('/profiles/{user}', [ProfilesController::class, 'show'])->name('profiles.show');
+Route::get('/profiles/{user}/edit', [ProfilesController::class, 'edit'])->name('profiles.edit');
+Route::patch('/profiles/{user}', [ProfilesController::class, 'update'])->name('profiles.update');
